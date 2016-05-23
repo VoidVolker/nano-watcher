@@ -1,13 +1,15 @@
 {
   "name": "nano-watcher",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Small and fast watch for files and directory changes and commands execution",
   "main": "nano-watcher.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "coffee -m -b -c *.coffee"
   },
-  "bin": { "nano-watcher" : "./bin/nano-watcher" },
+  "bin": {
+    "nano-watcher": "./bin/nano-watcher"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/VoidVolker/nano-watcher.git"
