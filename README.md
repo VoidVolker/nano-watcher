@@ -62,7 +62,9 @@ Config example:
     }
 
 `interval` - interval beetween checks of files change time
+
 `delay` - delay before commands run
+
 `cwd` - working directory, by default - same as config
 
-This module was developed to be powerfull and small tool to run commands on files changes. Work in Virtual box and with mounted FS.
+This module was developed to be powerfull and small tool to run commands on files changes. Works in Virtual box and with mounted FS.
