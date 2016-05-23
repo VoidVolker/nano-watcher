@@ -76,7 +76,7 @@ searchConfig = (cName) ->
         dirs.splice -2, 1
         if fileExists cPath
             userConf = fs.readJsonSync cPath
-            console.log 'Config loaded (a):', cPath
+            console.log 'Config loaded:', cPath
             if isObject userConf
                 configPath = cPath
             else
@@ -107,7 +107,7 @@ loadConf = (cPath) ->
             cPath = path.join cPath, configName
         if fileExists cPath
             userConf = fs.readJsonSync cPath
-            console.log 'Config loaded (b):', cPath
+            console.log 'Config loaded:', cPath
             if isObject userConf
                 configPath = cPath
             else

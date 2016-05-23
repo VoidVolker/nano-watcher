@@ -7,8 +7,12 @@ Global install:
 
 Run watcher:
 
-    nano-watcher -c path/to/config.json
-    nano-watcher --config path/to/config.json
+    nano-watcher
+
+In this case nano-watcher will search config file `nano-watcher.json` in all directories from current and up.
+
+    nano-watcher -c ./path/to/config.json
+    nano-watcher --config /path/to/config.json
     nano-watcher -c path/to/directory/with/nano-watcher.json/
 
 Local install:
@@ -17,14 +21,12 @@ Local install:
 
 Run watcher:
 
-    ./mode_modules/nano-watcher/bin/nano-watcher -c path/to/config.json
+    ./node_modules/nano-watcher/bin/nano-watcher -c path/to/config.json
 
 
-Run without args:
+VirtualBox / mounted FS install:
 
-    nano-watcher
-
-In this case nano-watcher will search config file `nano-watcher.json` in all directories from current and up.
+    npm i nano-watcher --save --no-bin-links
 
 Config example:
 
