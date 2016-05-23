@@ -1,4 +1,6 @@
 # nano-watcher
+
+[![Join the chat at https://gitter.im/VoidVolker/nano-watcher](https://badges.gitter.im/VoidVolker/nano-watcher.svg)](https://gitter.im/VoidVolker/nano-watcher?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 Small and fast watch for files and directory changes and commands execution
 
 Global install:
