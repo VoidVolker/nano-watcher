@@ -112,7 +112,7 @@ searchConfig = function(cName) {
     dirs.splice(-2, 1);
     if (fileExists(cPath)) {
       userConf = fs.readJsonSync(cPath);
-      console.log('Config loaded:', cPath);
+      console.log('Config loaded (a):', cPath);
       if (isObject(userConf)) {
         configPath = cPath;
       } else {
@@ -146,12 +146,13 @@ loadConf = function(cPath) {
     restartPause: appArgs.delay || 500
   };
   if (cPath !== undefined) {
+    cPath = path.resolve(path.normalize(cPath));
     if (dirExists(cPath)) {
       cPath = path.join(cPath, configName);
     }
     if (fileExists(cPath)) {
       userConf = fs.readJsonSync(cPath);
-      console.log('Config loaded:', cPath);
+      console.log('Config loaded (b):', cPath);
       if (isObject(userConf)) {
         configPath = cPath;
       } else {
@@ -410,7 +411,7 @@ runWatcher = function(sources) {
 };
 
 nanoWatch = function() {
-  var conf, cwd, e, error1;
+  var conf, cwd, err, error1;
   if (appArgs.help !== undefined) {
     console.log('This is empty help (fix me, please)');
     return;
@@ -418,9 +419,8 @@ nanoWatch = function() {
   try {
     conf = loadConf(appArgs.config);
   } catch (error1) {
-    e = error1;
-    console.error(e);
-    throw new Error('Config load error:');
+    err = error1;
+    throw new Error(err);
   }
   cwd = appArgs.cwd || configPath;
   if (cwd) {
@@ -429,14 +429,20 @@ nanoWatch = function() {
   if (configPath !== null) {
     watchFile(configPath, (function(_this) {
       return function() {
-        var error2;
+        var e, error2, i, len, newConf, ref, src;
         try {
-          conf = loadConf(configPath);
+          newConf = loadConf(configPath);
         } catch (error2) {
           e = error2;
           console.error(e);
           throw new Error('Config load error:');
         }
+        ref = conf.sources;
+        for (i = 0, len = ref.length; i < len; i++) {
+          src = ref[i];
+          src.stop();
+        }
+        conf = newConf;
         return runWatcher(conf.sources);
       };
     })(this));

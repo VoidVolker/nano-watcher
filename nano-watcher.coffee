@@ -76,7 +76,7 @@ searchConfig = (cName) ->
         dirs.splice -2, 1
         if fileExists cPath
             userConf = fs.readJsonSync cPath
-            console.log 'Config loaded:', cPath
+            console.log 'Config loaded (a):', cPath
             if isObject userConf
                 configPath = cPath
             else
@@ -102,11 +102,12 @@ loadConf = (cPath) ->
         restartPause: appArgs.delay or 500
     }
     if cPath isnt `undefined`
+        cPath = path.resolve path.normalize cPath
         if dirExists cPath
             cPath = path.join cPath, configName
         if fileExists cPath
             userConf = fs.readJsonSync cPath
-            console.log 'Config loaded:', cPath
+            console.log 'Config loaded (b):', cPath
             if isObject userConf
                 configPath = cPath
             else
@@ -338,9 +339,8 @@ nanoWatch = ->
         return
     try
         conf = loadConf appArgs.config
-    catch e
-        console.error e
-        throw new Error 'Config load error:'
+    catch err
+        throw new Error err
 
     cwd = appArgs.cwd or configPath
     if cwd
@@ -350,10 +350,13 @@ nanoWatch = ->
         watchFile( configPath,
             =>
                 try
-                    conf = loadConf configPath
+                    newConf = loadConf configPath
                 catch e
                     console.error e
                     throw new Error 'Config load error:'
+                for src in conf.sources
+                    src.stop()
+                conf = newConf
                 runWatcher conf.sources
         )
     # else

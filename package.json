@@ -5,7 +5,8 @@
   "main": "nano-watcher.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "coffee -m -b -c *.coffee"
+    "build": "coffee -m -b -c *.coffee",
+    "b": "coffee -m -b -c *.coffee"
   },
   "bin": {
     "nano-watcher": "./bin/nano-watcher"
