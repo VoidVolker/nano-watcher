@@ -3,10 +3,9 @@ Small and fast watch for files and directory changes and commands execution
 
 Run watcher:
 
-nano-watcher -c path/to/config.json
-nano-watcher --config path/to/config.json
-
-nano-watcher -c path/to/directory/with/nano-watcher.json/
+    nano-watcher -c path/to/config.json
+    nano-watcher --config path/to/config.json
+    nano-watcher -c path/to/directory/with/nano-watcher.json/
 
 Config example:
 
