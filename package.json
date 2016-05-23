@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "coffee -m -b -c *.coffee",
-    "b": "coffee -m -b -c *.coffee"
+    "b": "coffee -m -b -c *.coffee",
+    "p": "git status && npm version patch && npm publish"
   },
   "bin": {
     "nano-watcher": "./bin/nano-watcher"
