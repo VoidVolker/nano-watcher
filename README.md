@@ -73,3 +73,14 @@ Config example:
 `cwd` - working directory, by default - same as config
 
 This module was developed to be powerfull and small tool to run commands on files changes. Works in Virtual box and with mounted FS.
+
+CLI commads:
+
+`--help`, `-h` — show help
+
+`--interval`, `-i` — interval in ms
+
+`--delay`, `-d` — restart delay in ms
+
+`--cwd`, `-w` — working directory
+

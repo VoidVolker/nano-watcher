@@ -35,7 +35,7 @@ appArgs = require('minimist')(process.argv.slice(2), {
     delay: 'd',
     help: 'h',
     sources: 's',
-    cwd: 'cd',
+    cwd: 'w',
     run: 'r'
   }
 });

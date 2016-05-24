@@ -23,7 +23,7 @@ appArgs = require('minimist')(
         delay: 'd'
         help: 'h'
         sources: 's'
-        cwd: 'cd'
+        cwd: 'w'
         run: 'r'
     # usage:
 )
