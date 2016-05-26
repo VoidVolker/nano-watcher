@@ -257,7 +257,7 @@ class Source
 
     stopFile: ->
         if @fileWatchInterval isnt `undefined`
-            stopInterval @fileWatchInterval
+            clearInterval @fileWatchInterval
         return @
 
     stopTree: ->
@@ -321,16 +321,18 @@ class Source
                 @command.push c
 
 
-runWatcher = (sources) ->
-    if sources
-        for src in sources
+runWatcher = (conf) ->
+    if conf.sources
+        srcs = []
+        for src in conf.sources
             s = new Source src
             # console.log 'command', s.command
-            sources.push s
+            srcs.push s
             if appArgs.run is `undefined`
                 s.watch()
             else
                 s.runAll()
+        conf.sources = srcs
 
 nanoWatch = ->
 
@@ -357,10 +359,11 @@ nanoWatch = ->
                 for src in conf.sources
                     src.stop()
                 conf = newConf
-                runWatcher conf.sources
+                # runWatcher conf.sources
+                runWatcher newConf
         )
     # else
-    runWatcher conf.sources
+    runWatcher conf
 
     # console.log conf.sources
 

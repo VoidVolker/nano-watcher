@@ -309,7 +309,7 @@ Source = (function() {
 
   Source.prototype.stopFile = function() {
     if (this.fileWatchInterval !== undefined) {
-      stopInterval(this.fileWatchInterval);
+      clearInterval(this.fileWatchInterval);
     }
     return this;
   };
@@ -392,21 +392,22 @@ Source = (function() {
 
 })();
 
-runWatcher = function(sources) {
-  var i, len, results, s, src;
-  if (sources) {
-    results = [];
-    for (i = 0, len = sources.length; i < len; i++) {
-      src = sources[i];
+runWatcher = function(conf) {
+  var i, len, ref, s, src, srcs;
+  if (conf.sources) {
+    srcs = [];
+    ref = conf.sources;
+    for (i = 0, len = ref.length; i < len; i++) {
+      src = ref[i];
       s = new Source(src);
-      sources.push(s);
+      srcs.push(s);
       if (appArgs.run === undefined) {
-        results.push(s.watch());
+        s.watch();
       } else {
-        results.push(s.runAll());
+        s.runAll();
       }
     }
-    return results;
+    return conf.sources = srcs;
   }
 };
 
@@ -443,11 +444,11 @@ nanoWatch = function() {
           src.stop();
         }
         conf = newConf;
-        return runWatcher(conf.sources);
+        return runWatcher(newConf);
       };
     })(this));
   }
-  return runWatcher(conf.sources);
+  return runWatcher(conf);
 };
 
 module.exports = nanoWatch;
