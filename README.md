@@ -20,6 +20,7 @@ In this case nano-watcher will search config file `nano-watcher.json` in all dir
 
 Local install:
 
+    npm i nano-watcher
     npm i nano-watcher --save
 
 Run watcher:
@@ -27,9 +28,11 @@ Run watcher:
     ./node_modules/nano-watcher/bin/nano-watcher -c path/to/config.json
 
 
-VirtualBox / mounted FS install:
+VirtualBox share / mounted FS install:
 
     npm i nano-watcher --save --no-bin-links
+
+When running nano-watcher is watching and config file for changes and automatically reload it, so you don't need to restart nano-watcher for config reload.
 
 Config example:
 
@@ -42,7 +45,7 @@ Config example:
                 "path": "../index.js",
                 "command": {
                     "path": "./",
-                    "name": "dist build -- ",
+                    "name": "dist build",
                     "app": "node",
                     "args": ["build.js"]
                 }
@@ -50,7 +53,7 @@ Config example:
                 "path": "./client/app",
                 "ext": ["coffee"],
                 "command": {
-                    "name": "coffee client -- ",
+                    "name": "coffee client",
                     "app": "coffee",
                     "args": [ "-m", "-b", "-c", {"data": "file"} ]
                 }
@@ -58,7 +61,7 @@ Config example:
                 "path": "./server",
                 "ext": ["js"],
                 "command": {
-                    "name": "WS server -- ",
+                    "name": "WS server",
                     "app": "node-debug",
                     "args": ["--no-preload", "--cli", "server.js"]
                 }
@@ -76,11 +79,14 @@ This module was developed to be powerfull and small tool to run commands on file
 
 CLI commads:
 
-`--help`, `-h` — show help
+`--config`, `-c <path>`    Load config, where <path> is *.json file of directory with <nano-watcher.json> file
 
-`--interval`, `-i` — interval in ms
+`--interval`, `-i 200`     Interval in ms
 
-`--delay`, `-d` — restart delay in ms
+`--delay`, `-d 500`        Restart delay in ms
 
-`--cwd`, `-w` — working directory
+`--cwd`, `-w <path>`       Working directory
 
+`--help`, `-h`             Show this help
+
+`--version`, `-v`          Show version

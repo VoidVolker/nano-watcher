@@ -8,12 +8,13 @@ watch = require 'watch'
 fs = require 'fs-extra'
 psTree = require 'ps-tree'
 
+packageInfo = require './package.json'
+
 configName = 'nano-watcher.json'
 configPath =  null
 watchInterval = 200
 restartPause = 500
 procCwd = null
-
 
 appArgs = require('minimist')(
     process.argv.slice 2
@@ -25,8 +26,17 @@ appArgs = require('minimist')(
         sources: 's'
         cwd: 'w'
         run: 'r'
+        version: 'v'
     # usage:
 )
+
+commandsHelp = '\n\xA0\xA0\xA0\xA0nano-watcher v.' + packageInfo.version + '
+\n\n\xA0\xA0\xA0\xA0--config, -c <path>    Load config, where <path> is *.json file of directory with <nano-watcher.json> file
+\n\n\xA0\xA0\xA0\xA0--interval, -i 200     Interval in ms
+\n\n\xA0\xA0\xA0\xA0--delay, -d 500        Restart delay in ms
+\n\n\xA0\xA0\xA0\xA0--cwd, -w <path>       Working directory
+\n\n\xA0\xA0\xA0\xA0--help, -h             Show this help
+\n\n\xA0\xA0\xA0\xA0--version, -v          Show version\n'
 
 
 t = Object.prototype.toString
@@ -337,7 +347,10 @@ runWatcher = (conf) ->
 nanoWatch = ->
 
     if appArgs.help isnt `undefined`
-        console.log 'This is empty help (fix me, please)'
+        console.log commandsHelp
+        return
+    if appArgs.version isnt `undefined`
+        console.log packageInfo.version
         return
     try
         conf = loadConf appArgs.config
