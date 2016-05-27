@@ -30,6 +30,7 @@ Run watcher:
 
 VirtualBox share / mounted FS install:
 
+    npm i nano-watcher --no-bin-links
     npm i nano-watcher --save --no-bin-links
 
 When running nano-watcher is watching and config file for changes and automatically reload it, so you don't need to restart nano-watcher for config reload.
