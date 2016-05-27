@@ -40,7 +40,7 @@ Config example:
     {
         "interval": 200,
         "delay": "500",
-        "cwd": "directory/to/run/"
+        "cwd": "directory/to/run/",
         "sources": [
             {
                 "path": "../index.js",
