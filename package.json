@@ -1,6 +1,6 @@
 {
   "name": "nano-watcher",
-  "version": "2.0.11",
+  "version": "2.0.12",
   "description": "Small and fast watch for files and directory changes and commands execution",
   "main": "nano-watcher.js",
   "scripts": {
