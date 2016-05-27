@@ -77,6 +77,13 @@ Config example:
 
 `command` - can be object or array of objects (several commands)
 
+Restart logic:
+
+- Kill process tree, if first started process is still active
+- Sleep for `delay` ms
+- Run process (spawn) with arguments and selected directory
+
+
 This module was developed to be powerfull and small tool to run commands on files changes. Works in Virtual box and with mounted FS.
 
 
