@@ -37,38 +37,38 @@ When running nano-watcher is watching and config file for changes and automatica
 Config example:
 
 ```JSON
-    {
-        "interval": 200,
-        "delay": "500",
-        "cwd": "directory/to/run/",
-        "sources": [
-            {
-                "path": "../index.js",
-                "command": {
-                    "path": "./",
-                    "name": "dist build",
-                    "app": "node",
-                    "args": ["build.js"]
-                }
-            }{
-                "path": "./client/app",
-                "ext": ["coffee"],
-                "command": {
-                    "name": "coffee client",
-                    "app": "coffee",
-                    "args": [ "-m", "-b", "-c", {"data": "file"} ]
-                }
-            }, {
-                "path": "./server",
-                "ext": ["js"],
-                "command": {
-                    "name": "WS server",
-                    "app": "node-debug",
-                    "args": ["--no-preload", "--cli", "server.js"]
-                }
+{
+    "interval": 200,
+    "delay": "500",
+    "cwd": "directory/to/run/",
+    "sources": [
+        {
+            "path": "../index.js",
+            "command": {
+                "path": "./",
+                "name": "dist build",
+                "app": "node",
+                "args": ["build.js"]
             }
-        ]
-    }
+        }{
+            "path": "./client/app",
+            "ext": ["coffee"],
+            "command": {
+                "name": "coffee client",
+                "app": "coffee",
+                "args": [ "-m", "-b", "-c", {"data": "file"} ]
+            }
+        }, {
+            "path": "./server",
+            "ext": ["js"],
+            "command": {
+                "name": "WS server",
+                "app": "node-debug",
+                "args": ["--no-preload", "--cli", "server.js"]
+            }
+        }
+    ]
+}
 ```
 
 `interval` - interval beetween checks of files change time
