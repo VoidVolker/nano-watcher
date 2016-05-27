@@ -367,7 +367,7 @@ Source = (function() {
         command = [command];
       }
       if (!isArray(command)) {
-        throw new Error('source.command is not String, Object or Array of Objects');
+        throw new Error('source.command is not Object or Array of Objects');
       }
       this.command = [];
       for (i = 0, len = command.length; i < len; i++) {

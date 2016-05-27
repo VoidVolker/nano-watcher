@@ -76,7 +76,11 @@ Config example:
 
 `cwd` - working directory, by default - same as config
 
+`command` - can be object or array of objects (several commands)
+
 This module was developed to be powerfull and small tool to run commands on files changes. Works in Virtual box and with mounted FS.
+
+
 
 CLI commads:
 

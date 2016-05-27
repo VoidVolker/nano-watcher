@@ -314,7 +314,7 @@ class Source
             if isObject command
                 command = [command]
             if not isArray command
-                throw new Error 'source.command is not String, Object or Array of Objects'
+                throw new Error 'source.command is not Object or Array of Objects'
             @command = []
             for cmd in command
                 if cmd.app is `undefined`
