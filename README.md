@@ -36,6 +36,7 @@ When running nano-watcher is watching and config file for changes and automatica
 
 Config example:
 
+```JSON
     {
         "interval": 200,
         "delay": "500",
@@ -68,6 +69,7 @@ Config example:
             }
         ]
     }
+```
 
 `interval` - interval beetween checks of files change time
 
