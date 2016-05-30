@@ -92,7 +92,7 @@ This module was developed to be powerfull and small tool to run commands on file
 
 CLI commads:
 
-`--config`, `-c <path>`    — Load config, where <path> is *.json file of directory with <nano-watcher.json> file
+`--config`, `-c <path>`    — Load config, where `path` is *.json file of directory with `nano-watcher.json` file
 
 `--json`, `-j {...}`       — Read config from *.json
 
