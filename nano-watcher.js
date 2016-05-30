@@ -36,14 +36,14 @@ appArgs = require('minimist')(process.argv.slice(2), {
     interval: 'i',
     delay: 'd',
     help: 'h',
-    sources: 's',
     cwd: 'w',
     run: 'r',
-    version: 'v'
+    version: 'v',
+    json: 'j'
   }
 });
 
-commandsHelp = '\n\xA0\xA0\xA0\xA0nano-watcher v.' + packageInfo.version + '\n\n\xA0\xA0\xA0\xA0--config, -c <path>    Load config, where <path> is *.json file of directory with <nano-watcher.json> file \n\n\xA0\xA0\xA0\xA0--interval, -i 200     Interval in ms \n\n\xA0\xA0\xA0\xA0--delay, -d 500        Restart delay in ms \n\n\xA0\xA0\xA0\xA0--cwd, -w <path>       Working directory \n\n\xA0\xA0\xA0\xA0--help, -h             Show this help \n\n\xA0\xA0\xA0\xA0--version, -v          Show version\n';
+commandsHelp = '\xA0\xA0\xA0\xA0nano-watcher v.' + packageInfo.version + '\n\n\xA0\xA0\xA0\xA0--config, -c <path>    Load config, where <path> is *.json file of directory with <nano-watcher.json> file \n\n\xA0\xA0\xA0\xA0--json, -j {...}       Read config from *.json \n\n\xA0\xA0\xA0\xA0--interval, -i 200     Interval in ms \n\n\xA0\xA0\xA0\xA0--delay, -d 500        Restart delay in ms \n\n\xA0\xA0\xA0\xA0--cwd, -w <path>       Working directory \n\n\xA0\xA0\xA0\xA0--help, -h             Show this help \n\n\xA0\xA0\xA0\xA0--version, -v          Show version\n';
 
 t = Object.prototype.toString;
 
@@ -417,7 +417,7 @@ runWatcher = function(conf) {
 };
 
 nanoWatch = function() {
-  var conf, cwd, err, error1;
+  var conf, cwd, err, error1, error2;
   if (appArgs.help !== undefined) {
     console.log(commandsHelp);
     return;
@@ -426,11 +426,21 @@ nanoWatch = function() {
     console.log(packageInfo.version);
     return;
   }
-  try {
-    conf = loadConf(appArgs.config);
-  } catch (error1) {
-    err = error1;
-    throw new Error(err);
+  if (appArgs.json !== undefined) {
+    try {
+      conf = JSON.parse(appArgs.json);
+    } catch (error1) {
+      err = error1;
+      throw new Error(err);
+    }
+    console.log('parsed conf from json:', conf);
+  } else {
+    try {
+      conf = loadConf(appArgs.config);
+    } catch (error2) {
+      err = error2;
+      throw new Error(err);
+    }
   }
   cwd = appArgs.cwd || configPath;
   if (cwd) {
@@ -439,11 +449,11 @@ nanoWatch = function() {
   if (configPath !== null) {
     watchFile(configPath, (function(_this) {
       return function() {
-        var e, error2, i, len, newConf, ref, src;
+        var e, error3, i, len, newConf, ref, src;
         try {
           newConf = loadConf(configPath);
-        } catch (error2) {
-          e = error2;
+        } catch (error3) {
+          e = error3;
           console.error(e);
           throw new Error('Config load error:');
         }

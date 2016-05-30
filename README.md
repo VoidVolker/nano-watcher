@@ -92,14 +92,16 @@ This module was developed to be powerfull and small tool to run commands on file
 
 CLI commads:
 
-`--config`, `-c <path>`    Load config, where <path> is *.json file of directory with <nano-watcher.json> file
+`--config`, `-c <path>`    — Load config, where <path> is *.json file of directory with <nano-watcher.json> file
 
-`--interval`, `-i 200`     Interval in ms
+`--json`, `-j {...}`       — Read config from *.json
 
-`--delay`, `-d 500`        Restart delay in ms
+`--interval`, `-i 200`     — Interval in ms
 
-`--cwd`, `-w <path>`       Working directory
+`--delay`, `-d 500`        — Restart delay in ms
 
-`--help`, `-h`             Show this help
+`--cwd`, `-w <path>`       — Working directory
 
-`--version`, `-v`          Show version
+`--help`, `-h`             — Show this help
+
+`--version`, `-v`          — Show version

@@ -23,15 +23,22 @@ appArgs = require('minimist')(
         interval: 'i'
         delay: 'd'
         help: 'h'
-        sources: 's'
         cwd: 'w'
         run: 'r'
         version: 'v'
-    # usage:
+        json: 'j'
+        # source: 's'
+        # path: 'p'
+        # name: 'n'
+        # app: 'a'
+        # args: 'g'
 )
 
-commandsHelp = '\n\xA0\xA0\xA0\xA0nano-watcher v.' + packageInfo.version + '
+# console.log appArgs
+
+commandsHelp = '\xA0\xA0\xA0\xA0nano-watcher v.' + packageInfo.version + '
 \n\n\xA0\xA0\xA0\xA0--config, -c <path>    Load config, where <path> is *.json file of directory with <nano-watcher.json> file
+\n\n\xA0\xA0\xA0\xA0--json, -j {...}       Read config from *.json
 \n\n\xA0\xA0\xA0\xA0--interval, -i 200     Interval in ms
 \n\n\xA0\xA0\xA0\xA0--delay, -d 500        Restart delay in ms
 \n\n\xA0\xA0\xA0\xA0--cwd, -w <path>       Working directory
@@ -352,10 +359,17 @@ nanoWatch = ->
     if appArgs.version isnt `undefined`
         console.log packageInfo.version
         return
-    try
-        conf = loadConf appArgs.config
-    catch err
-        throw new Error err
+    if appArgs.json isnt `undefined`
+        try
+            conf = JSON.parse appArgs.json
+        catch err
+            throw new Error err
+        console.log 'parsed conf from json:', conf
+    else
+        try
+            conf = loadConf appArgs.config
+        catch err
+            throw new Error err
 
     cwd = appArgs.cwd or configPath
     if cwd
