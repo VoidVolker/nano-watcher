@@ -347,7 +347,7 @@ Source = (function() {
   };
 
   function Source(opt) {
-    var c, cmd, command, i, len;
+    var c, cmd, command, cwd, i, len;
     if (!isObject(opt)) {
       throw new Error('Wrong options format. Expect: "Object" Get: "' + t.call(opt) + '"');
     }
@@ -385,8 +385,12 @@ Source = (function() {
           args: cmd.args || [],
           proc: null
         };
+        cwd = path.resolve(c.path);
+        if (!dirExists(cwd)) {
+          cwd = path.dirname(cwd);
+        }
         c.spawnOpt = {
-          cwd: path.resolve(c.path)
+          cwd: cwd
         };
         this.command.push(c);
       }

@@ -334,7 +334,10 @@ class Source
                     path: cmd.path or @path
                     args: cmd.args or []
                     proc: null
-                c.spawnOpt = cwd: path.resolve c.path
+                cwd = path.resolve c.path
+                if not dirExists cwd
+                    cwd = path.dirname cwd
+                c.spawnOpt = cwd: cwd
                 @command.push c
 
 
