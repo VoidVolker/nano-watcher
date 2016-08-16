@@ -382,7 +382,7 @@ Source = (function() {
         }
         c = {
           app: cmd.app,
-          name: cmd.name || cmd.app,
+          name: cmd.name || '',
           path: cmd.path || this.path,
           args: cmd.args || [],
           proc: null
