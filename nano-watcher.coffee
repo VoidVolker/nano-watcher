@@ -333,7 +333,7 @@ class Source
                     cmd.args = if isArray(cmd.args) then cmd.args else [ cmd.args.toString() ]
                 c =
                     app: cmd.app
-                    name: cmd.name or cmd.app
+                    name: cmd.name or ''
                     path: cmd.path or @path
                     args: cmd.args or []
                     proc: null
