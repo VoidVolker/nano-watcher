@@ -219,32 +219,34 @@ Source = (function() {
       }
     }
     cmd.proc = spawn(cmd.app, args, cmd.spawnOpt);
-    cmd.proc.stdout.on('data', function(data) {
-      data = data.toString();
-      if ('\n' === data.slice(-6, -5)) {
-        data = data.slice(0, -6) + data.slice(-5);
-      }
-      if ('\n' === data.slice(-1)) {
-        data = data.slice(0, -1);
-      }
-      if ('\n' === data.slice(-1)) {
-        data = data.slice(0, -1);
-      }
-      return console.log('    ', cmd.name, data);
-    });
-    cmd.proc.stderr.on('data', function(data) {
-      data = data.toString();
-      if ('\n' === data.slice(-6, -5)) {
-        data = data.slice(0, -6) + data.slice(-5);
-      }
-      if ('\n' === data.slice(-1)) {
-        data = data.slice(0, -1);
-      }
-      if ('\n' === data.slice(-1)) {
-        data = data.slice(0, -1);
-      }
-      return console.error('    ', cmd.name, data);
-    });
+    if (cmd.name && cmd.name.length > 0) {
+      cmd.proc.stdout.on('data', function(data) {
+        data = data.toString();
+        if ('\n' === data.slice(-6, -5)) {
+          data = data.slice(0, -6) + data.slice(-5);
+        }
+        if ('\n' === data.slice(-1)) {
+          data = data.slice(0, -1);
+        }
+        if ('\n' === data.slice(-1)) {
+          data = data.slice(0, -1);
+        }
+        return console.log('    ', cmd.name, data);
+      });
+      cmd.proc.stderr.on('data', function(data) {
+        data = data.toString();
+        if ('\n' === data.slice(-6, -5)) {
+          data = data.slice(0, -6) + data.slice(-5);
+        }
+        if ('\n' === data.slice(-1)) {
+          data = data.slice(0, -1);
+        }
+        if ('\n' === data.slice(-1)) {
+          data = data.slice(0, -1);
+        }
+        return console.error('    ', cmd.name, data);
+      });
+    }
     cmd.proc.on('error', function(error) {
       return console.error('---- Error in <', cmd.name, '>', error.message);
     });

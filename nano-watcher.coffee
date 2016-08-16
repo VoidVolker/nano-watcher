@@ -181,27 +181,30 @@ class Source
                 args.push arg
         # console.log 'spawn', cmd.app, args, cmd.spawnOpt
         cmd.proc = spawn cmd.app, args, cmd.spawnOpt
-        cmd.proc.stdout.on( 'data', (data) ->
-            data = data.toString()
-            if '\n' is data.slice -6, -5
-                data = data.slice(0, -6) + data.slice -5
-            if '\n' is data.slice -1
-                data = data.slice 0, -1
-            if '\n' is data.slice -1
-                data = data.slice 0, -1
-            console.log '    ', cmd.name, data
-        )
 
-        cmd.proc.stderr.on( 'data', (data) ->
-            data = data.toString();
-            if '\n' is data.slice -6, -5
-                data = data.slice(0, -6) + data.slice -5
-            if '\n' is data.slice -1
-                data = data.slice 0, -1
-            if '\n' is data.slice -1
-                data = data.slice 0, -1
-            console.error '    ', cmd.name, data
-        )
+        if cmd.name and cmd.name.length > 0
+
+            cmd.proc.stdout.on( 'data', (data) ->
+                data = data.toString()
+                if '\n' is data.slice -6, -5
+                    data = data.slice(0, -6) + data.slice -5
+                if '\n' is data.slice -1
+                    data = data.slice 0, -1
+                if '\n' is data.slice -1
+                    data = data.slice 0, -1
+                console.log '    ', cmd.name, data
+            )
+
+            cmd.proc.stderr.on( 'data', (data) ->
+                data = data.toString();
+                if '\n' is data.slice -6, -5
+                    data = data.slice(0, -6) + data.slice -5
+                if '\n' is data.slice -1
+                    data = data.slice 0, -1
+                if '\n' is data.slice -1
+                    data = data.slice 0, -1
+                console.error '    ', cmd.name, data
+            )
 
         cmd.proc.on 'error', (error) -> console.error  '---- Error in <', cmd.name, '>', error.message
         cmd.proc.on 'exit', -> if cmd.proc isnt null then cmd.proc = null
